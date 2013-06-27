@@ -158,7 +158,7 @@ class ListAction extends RouteAction
         $form = null;
         if ($enabled) {
             $formBuilder = $this->get('form.factory')
-                ->createNamedBuilder('form', $this->getOption('advanced_search_parameter'))
+                ->createNamedBuilder('form', $this->getOption('advanced_search_parameter'), null, array('csrf_protection' => false))
             ;
             $filters = $this->getAdvancedSearchFilters($fields);
             foreach ($filters as $fieldName => $filter) {
