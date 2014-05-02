@@ -63,7 +63,7 @@ class DeleteAction extends RouteAction
         return $this->redirect($this->getRedirectionUrl());
     }
 
-    private function getRedirectionUrl()
+    protected function getRedirectionUrl()
     {
         $redirectionUrl = $this->getOption('redirection_url');
 

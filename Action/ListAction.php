@@ -114,7 +114,7 @@ class ListAction extends RouteAction
         ));
     }
 
-    private function parseOptions()
+    protected function parseOptions()
     {
         $modelExtension = $this->getModule()->getExtension('model');
         $this->setOption('list_fields', $modelExtension->filterFields($this->getOption('list_fields')));
@@ -122,7 +122,7 @@ class ListAction extends RouteAction
         $this->setOption('advanced_search_fields', $modelExtension->filterFields($this->getOption('advanced_search_fields')));
     }
 
-    private function processSimpleSearch($query)
+    protected function processSimpleSearch($query)
     {
         $request = $this->get('request');
         $adminSession = $this->getModule()->getAdminSession();
@@ -148,7 +148,7 @@ class ListAction extends RouteAction
         return array($enabled, $value);
     }
 
-    private function processAdvancedSearch($query)
+    protected function processAdvancedSearch($query)
     {
         $request = $this->get('request');
         $adminSession = $this->getModule()->getAdminSession();
@@ -189,7 +189,7 @@ class ListAction extends RouteAction
         return array($enabled, $form);
     }
 
-    private function getAdvancedSearchFilters(FieldBag $fields)
+    protected function getAdvancedSearchFilters(FieldBag $fields)
     {
         $filters = array();
         foreach ($fields as $field) {
@@ -214,7 +214,7 @@ class ListAction extends RouteAction
         return $filters;
     }
 
-    private function transformAdvancedSearchFilter($type)
+    protected function transformAdvancedSearchFilter($type)
     {
         if ('string' === $type) {
             return new \Pablodip\AdminModuleBundle\Filter\StringFilter($this->get('translator'));
@@ -229,7 +229,7 @@ class ListAction extends RouteAction
         throw new \RuntimeException(sprintf('The advanced filter type "%s" cannot be transformed.', $type));
     }
 
-    private function processSort($query)
+    protected function processSort($query)
     {
         $request = $this->get('request');
         $adminSession = $this->getModule()->getAdminSession();
