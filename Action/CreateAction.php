@@ -71,7 +71,7 @@ class CreateAction extends RouteAction
         ));
     }
 
-    private function getRedirectionUrl($model)
+    protected function getRedirectionUrl($model)
     {
         $redirectionUrl = $this->getOption('redirection_url');
 
