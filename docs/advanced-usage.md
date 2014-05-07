@@ -97,11 +97,17 @@ For creating new objects, you could add the following link to the parent's templ
 
 The `trans` tags are only required if your application does localisation (which it probably should!)
 
-For listing and edited them, you could create a separate controller method which renders a template within the parent template:
+For listing and editing the child objects, you could create a separate controller method which renders a template within the parent template:
 
     {% render "MyProjAdminBundle:Default:countryList" with {'region_id': model.id} %}
 
-That template then created edit links in a similar way to the new link shown above.
+That template could then include edit links in a similar way to the new link shown above.
+
+#### Referring to other fields on the parent
+
+In the template examples above, we simply pulled in the `region_id` into the template.  If you want access to other properties of the parent object, that is possible using the special `_parent` attribute.  For example, consider the following code which prints out the parent object's name:
+
+    {{ app.request.attributes.get('_parent').name }}
 
 ### Multiple levels of nesting
 
