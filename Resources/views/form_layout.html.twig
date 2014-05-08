@@ -19,13 +19,14 @@
 {% endblock %}
 
 {# Overrides form_div_layout.html.twig to add classes to all #}
-{# inut fields except checkboxes and radio buttons #}
+{# input fields except checkboxes and radio buttons #}
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
     <input
         {% if type != 'checkbox' and type != 'radio' %}
-         class="form-control"
+        {# Merge the class you need here with any others added elsewhere #}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
         {% endif %}
          type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endspaceless %}
@@ -34,7 +35,8 @@
 {# Same again for textareas #}
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea class="form-control" {{ block('widget_attributes') }}>{{ value }}</textarea>
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
 {% endblock textarea_widget %}
 
@@ -44,7 +46,8 @@
     {% if required and empty_value is none and not empty_value_in_choices and not multiple %}
         {% set required = false %}
     {% endif %}
-    <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
