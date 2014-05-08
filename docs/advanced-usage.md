@@ -13,6 +13,33 @@ By default, the module will render you textboxes, checkboxes and drop-downs for 
         ),
     ));
 
+## Custom field actions
+
+You can configure the actions shown next to each item in a list.
+
+The default actions are "edit" and "delete".  To **remove them**, add some code like this to your module configuration file:
+
+    $listAction = $this->getAction("list");
+    foreach (array('edit', 'delete') as $key) {
+        $listAction->getOption('model_actions')->remove($key);
+    }
+
+You can also add **new actions**.  First, create a template file with the necessary HTML or Twig in.  In this example, we're adding a link to a list of clients which goes to a list page for users belonging to that client.
+
+    <a href="{{ path('admin_clientusers_list', { 'client_id': model.id }) }}">
+        <i class="icon-list"></i>
+        Client users
+    </a>
+
+(Notice that the route has an attribute which is the client's ID, retrieved via a reference to the `model` variable.  `model` is the item being administered; in this instance, the item whose list entry is being created.)
+
+Then reference that template file in your module configuration like this:
+
+    $listAction = $this->getAction("list");
+    $listAction->getOption('model_actions')->add(array(
+        'clientUsersList' => 'path/to/your/new/template/file.html.twig',
+    ));
+
 ## Parent/child relationships
 
 Say that you have an admin module for a Region, and each of those Region has one or more Countries.  In such a "parent/child" situation, when the admin bundle creates you new Countries, it needs to set the details of their parent Region.  Fortunately, you can use the _MolinoNestedExtension_ to handle a lot of this for you!  This section explains how.
