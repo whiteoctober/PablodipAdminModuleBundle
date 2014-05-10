@@ -31,6 +31,10 @@ h1 {
     margin-bottom: 18px;
 }
 
+.admin-list-simple-advanced-search-switch span {
+    padding: 0 0 0 3px;
+}
+
 .admin-list-simple-search,
 .admin-list-advanced-search-switch {
     display: inline-block;
@@ -65,6 +69,10 @@ h1 {
 
 .admin-list-nb-results-and-actions .admin-list-actions {
     float: right;
+}
+
+.admin-list-nb-results-and-actions .admin-list-actions strong {
+    padding: 0 0 0 3px;
 }
 
 .admin-list-table {
