@@ -172,7 +172,7 @@ h1 {
 //
 */
 .form-vertical .form-group, .form-vertical .form-actions {
-    /* Limit width, since inouts are set to 100% */
+    /* Limit width, since inputs are set to 100% */
     min-width: 200px;
     max-width: 25%;
 }
