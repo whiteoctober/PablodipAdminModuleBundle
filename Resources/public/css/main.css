@@ -31,6 +31,10 @@ h1 {
     margin-bottom: 18px;
 }
 
+.admin-list-simple-advanced-search-switch span {
+    padding: 0 0 0 3px;
+}
+
 .admin-list-simple-search,
 .admin-list-advanced-search-switch {
     display: inline-block;
@@ -65,6 +69,10 @@ h1 {
 
 .admin-list-nb-results-and-actions .admin-list-actions {
     float: right;
+}
+
+.admin-list-nb-results-and-actions .admin-list-actions strong {
+    padding: 0 0 0 3px;
 }
 
 .admin-list-table {
@@ -104,6 +112,11 @@ h1 {
     overflow: hidden;
     white-space: nowrap;
     width: 1px;
+}
+
+.admin-list-td-actions span {
+    /* Gap between links and icons in UI controls */
+    padding: 0 3px 0 4px;
 }
 
 .admin-list-bath-max-per-page {
@@ -159,7 +172,7 @@ h1 {
 //
 */
 .form-vertical .form-group, .form-vertical .form-actions {
-    /* Limit width, since inouts are set to 100% */
+    /* Limit width, since inputs are set to 100% */
     min-width: 200px;
     max-width: 25%;
 }

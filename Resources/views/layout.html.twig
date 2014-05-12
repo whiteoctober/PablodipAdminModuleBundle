@@ -75,9 +75,16 @@
 		<div class="container-fluid">
         {% for alert in ['warning', 'error', 'success', 'info'] %}
             {% for flash in app.session.flashbag.get(alert) %}
+                {# Bootstrap 3 uses alert-danger instead of alert-error #}
+                {% if alert == 'error' %}
+                <div class="alert alert-danger admin-alert">
+                    {{ flash }}
+                </div>
+                {% else %}
                 <div class="alert alert-{{ alert }} admin-alert">
                     {{ flash }}
                 </div>
+                {% endif %}
             {% endfor %}
         {% endfor %}
 		    <div id="content">
