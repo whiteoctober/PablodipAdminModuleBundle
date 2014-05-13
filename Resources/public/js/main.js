@@ -39,13 +39,27 @@ $(function () {
 
     // Turn on/off all the tickboxes in the Admin users table if you turn
     // on/off the tickbox in that table's header
-    $('.admin-list-th-checkbox input').click(function () {
+    $('.admin-list-th-checkbox input, #admin-list-batch-all').click(function () {
         var inputs = $('.admin-list-table .admin-list-td-checkbox input');
         if ($(this).prop('checked')) {
             inputs.prop('checked', true);
         } else {
             inputs.prop('checked', false);
         }
+
+        // Match the state of the All tickbox in the batch actions
+        // controls to the state of the tickbox in the table header
+        if ($(this).attr('id') === 'admin-list-batch-all' && $('.admin-list-th-checkbox input').length > 0) {
+
+            $('.admin-list-th-checkbox input').prop('checked', $(this).prop('checked'));
+
+        } else if ($('#admin-list-batch-all').length > 0) {
+
+            // ... and vice-versa, if the batch controls exist
+            $('#admin-list-batch-all').prop('checked', $(this).prop('checked'));
+
+        }
+
     });
 
     // Controls for the Admin user list's bulk actions form
