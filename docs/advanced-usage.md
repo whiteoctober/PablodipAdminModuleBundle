@@ -1,5 +1,24 @@
 # More advanced usage
 
+## Sorting
+
+Applying sorting is actually really easy, just use the `sortable` parameter when adding model fields in the `configure` function.  For example:
+
+    $modelFields->add(array(
+        'lastName' => array(
+            'label' => 'Last name',
+            'sortable' => true,
+        ),
+    ));
+
+### Sorting a table by default
+
+The easiest way to sort by default is to configure the route-creation code to include the necessary parameters.  In Twig, for example, you might have some code like this:
+
+    <a href="{{ path("admin_user_list", {'sort': 'lastName', 'order': 'asc'}) }}">User list</a>
+
+`sort` and `order` will be added as querystring parameters and picked up by the module.
+
 ## Custom form fields
 
 By default, the module will render you textboxes, checkboxes and drop-downs for dates, all worked out from the value you set for `template`.  However, you can instruct it to use any of [Symfony2's form types](http://symfony.com/doc/current/reference/forms/types.html) thanks to the `form_type` property!  You can also pass through settings for these types.  Here's an example:
