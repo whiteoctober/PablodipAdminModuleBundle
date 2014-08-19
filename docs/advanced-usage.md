@@ -59,6 +59,26 @@ Then reference that template file in your module configuration like this:
         'clientUsersList' => 'path/to/your/new/template/file.html.twig',
     ));
 
+## Redirecting to a different page after creating/editing/deleting
+
+You can alter the page to which a user is taken after creating/editing/deleting by setting the `redirection_url` option for the "create", "update" or "delete" action as appropriate.
+
+At its simplest, this can be a string:
+
+    $createAction = $this->getAction("create");
+    $createAction->setOption("redirection_url", "http://www.google.com");
+
+You can also pass in a PHP callable which returns a URL string.  If you're passing a callable as the `redirection_url` option for the "create" or "update" action, the callable will be passed a parameter when called.  This parameter is the entity that has just been created or updated:
+
+    $redirectFunc = function($model) {
+        return "http://www.google.com?q=" . $model->getEmail();
+    };
+
+    $createAction = $this->getAction("create");
+    $createAction->setOption("redirection_url", $redirectFunc);
+
+If you don't set the `redirection_url` option, the user will be redirected to the appropriate entity's list page.
+
 ## Parent/child relationships
 
 Say that you have an admin module for a Region, and each of those Region has one or more Countries.  In such a "parent/child" situation, when the admin bundle creates you new Countries, it needs to set the details of their parent Region.  Fortunately, you can use the _MolinoNestedExtension_ to handle a lot of this for you!  This section explains how.
