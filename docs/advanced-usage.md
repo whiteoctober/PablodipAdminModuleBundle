@@ -70,8 +70,8 @@ At its simplest, this can be a string:
 
 You can also pass in a PHP callable which returns a URL string.  If you're passing a callable as the `redirection_url` option for the "create" or "update" action, the callable will be passed a parameter when called.  This parameter is the entity that has just been created or updated:
 
-    $redirectFunc = function($model) {
-        return "http://www.google.com?q=" . $model->getEmail();
+    $redirectFunc = function($model) use ($router) {
+        return $router->generate('my_route', array('user' => $model->getId()));
     };
 
     $createAction = $this->getAction("create");
