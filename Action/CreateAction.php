@@ -48,13 +48,13 @@ class CreateAction extends RouteAction
 
         $form->bindRequest($this->get('request'));
         if ($form->isValid()) {
-            if ($response = $this->callOptionCallback('pre_save_callback')) {
+            if ($response = $this->callOptionCallback('pre_save_callback', array($model))) {
                 return $response;
             }
 
             $this->getMolino()->save($model);
 
-            if ($response = $this->callOptionCallback('post_save_callback')) {
+            if ($response = $this->callOptionCallback('post_save_callback', array($model))) {
                 return $response;
             }
 
