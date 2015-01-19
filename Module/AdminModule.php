@@ -12,6 +12,7 @@
 namespace Pablodip\AdminModuleBundle\Module;
 
 use Pablodip\AdminModuleBundle\Field\Guesser\DefaultOptionGuesser;
+use Pablodip\ModuleBundle\Extension\Molino\BaseMolinoExtension;
 use Pablodip\ModuleBundle\Module\Module;
 use Pablodip\ModuleBundle\Extension\Model\ModelExtension;
 use Pablodip\ModuleBundle\Field\FieldBag;
@@ -59,6 +60,7 @@ abstract class AdminModule extends Module
         ));
 
         $this->addOption('admin_session_parameter', 'as');
+        $this->addOption('model_form_options', array());
 
         $this->addActions(array(
             new Action\ListAction(),
@@ -106,6 +108,9 @@ abstract class AdminModule extends Module
      */
     public function createModelForm($model, FieldBag $fields, array $options = array('method' => 'POST'))
     {
+        // pull in any options defined in defineConfiguration
+        $options = array_merge($options, $this->getOption("model_form_options"));
+
         $formBuilder = $this->getContainer()
             ->get('form.factory')
             ->createBuilder('form', $model, $options)

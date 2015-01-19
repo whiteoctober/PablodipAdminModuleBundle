@@ -79,6 +79,34 @@ You can also pass in a PHP callable which returns a URL string.  If you're passi
 
 If you don't set the `redirection_url` option, the user will be redirected to the appropriate entity's list page.
 
+## Validation groups
+
+You can set a validation group for all form fields created by your module.  Override `defineConfiguration` like this:
+
+    protected function defineConfiguration()
+    {
+        parent::defineConfiguration();
+
+        $this->setOption('model_form_options', array('validation_groups' => array('your_group_here')));
+    }
+
+Note that, if you explicitly add a constraint to a field when configuring it in your module,
+you'll need to set the validation group on that too, even if you've overridden `defineConfiguration` as above.
+Here's an example:
+
+        $modelFields->add(array(
+            "new_password" => array(
+                "form_type" => "password",
+                "label" => "New password",
+                "form_options" => array(
+                    'constraints' => new Length(array(
+                        'min' => 8,
+                        'minMessage' => 'The new password must be at least {{ limit }} characters',
+                        'groups' => 'your_group_here',
+                    ))),
+                ),
+        ));
+
 ## Parent/child relationships
 
 Say that you have an admin module for a Region, and each of those Region has one or more Countries.  In such a "parent/child" situation, when the admin bundle creates you new Countries, it needs to set the details of their parent Region.  Fortunately, you can use the _MolinoNestedExtension_ to handle a lot of this for you!  This section explains how.
