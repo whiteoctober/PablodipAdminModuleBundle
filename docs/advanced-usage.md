@@ -13,11 +13,11 @@ Applying sorting is actually really easy, just use the `sortable` parameter when
 
 ### Sorting a table by default
 
-The easiest way to sort by default is to configure the route-creation code to include the necessary parameters.  In Twig, for example, you might have some code like this:
+To set the default sort order for a table, add the `sortable` parameter as above, and add code like the
+following to configure the list action:
 
-    <a href="{{ path("admin_user_list", {'sort': 'lastName', 'order': 'asc'}) }}">User list</a>
-
-`sort` and `order` will be added as querystring parameters and picked up by the module.
+    $listAction = $this->getAction("list");
+    $listAction->setOption("sort_default", "lastName");
 
 ## Custom form fields
 
