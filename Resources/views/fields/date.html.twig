@@ -1,1 +1,3 @@
-{{ attribute(model, field.name) | date(field.hasOption('date_format') ? field.getOption('date_format') : 'Y-m-d') }}
+{% if attribute(model, field.name) is not null %}
+    {{ attribute(model, field.name) | date(field.hasOption('date_format') ? field.getOption('date_format') : 'Y-m-d') }}
+{% endif %}
