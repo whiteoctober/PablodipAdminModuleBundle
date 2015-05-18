@@ -18,6 +18,7 @@ Documentation is in the `docs` folder:
 
 * [Basic usage](docs/basic-usage.md)
 * [Advanced usage](docs/advanced-usage.md)
+* [Filters (advanced search)](docs/filters.md)
 * [Troubleshooting](docs/troubleshooting.md)
 
 ## See also
