@@ -61,7 +61,26 @@ Here's an example:
                 ),
         ));
 
-## Custom field actions
+## Removing actions
+
+You don't have to provide list, create, edit and delete for all your entities; you can remove the default actions if required.
+  
+For example, you could add some code like the following into your `configure` method to remove the add, edit and delete actions:
+
+    foreach (array('new', 'create', 'edit', 'update', 'delete') as $action) {
+        $this->deleteAction($action);
+    }
+
+You'd also need to remove the field actions from the list - see the next section.
+
+If you're removing the ability to delete entities, you probably want to remove the "delete all selected items" batch option.
+You could try and remove the `'batch'` option itself to remove the whole drop-down: `$this->deleteAction('batch');`.
+However, you'll then find that the list template errors because it assumes that the batch-options dropdown will always be there.
+If you don't want to modify the template, you could simply remove the delete option from the dropdown:
+`$this->getAction('batch')->getOption('batch_actions')->remove('delete');`
+
+
+## Adding and removing field actions
 
 You can configure the actions shown next to each item in a list.
 
