@@ -113,6 +113,6 @@ You'll be able to filter now from the list page in your module.
 
 _Previous: [Advanced Usage](advanced-usage.md)_
 
-_Next: [Troubleshooting](troubleshooting.md)_
+_Next: [Administering parent/child entity relationships](docs/parent-child.md)_
 
 _Back to [README.md](../README.md)_
