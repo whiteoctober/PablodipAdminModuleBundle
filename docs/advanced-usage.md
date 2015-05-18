@@ -19,9 +19,10 @@ following to configure the list action:
     $listAction = $this->getAction("list");
     $listAction->setOption("sort_default", "lastName");
 
-## Custom form fields
+## Configuring form fields
 
-By default, the module will render you textboxes, checkboxes and drop-downs for dates, all worked out from the value you set for `template`.  However, you can instruct it to use any of [Symfony2's form types](http://symfony.com/doc/current/reference/forms/types.html) thanks to the `form_type` property!  You can also pass through settings for these types.  Here's an example:
+By default, the module will render you textboxes, checkboxes and drop-downs for dates, all worked out from the value you set for `template`.  However, you can instruct it to use any of [Symfony2's form types](http://symfony.com/doc/current/reference/forms/types.html) thanks to the `form_type` property!
+You can also pass through settings for these types.  Here's an example:
 
     $modelFields->add(array(
         'votesPercent' => array(
@@ -31,6 +32,34 @@ By default, the module will render you textboxes, checkboxes and drop-downs for 
             'form_options' => array('required' => false, 'type' => 'integer')
         ),
     ));
+    
+### Validation groups
+
+You can set a validation group for all form fields created by your module.  Override `defineConfiguration` like this:
+
+    protected function defineConfiguration()
+    {
+        parent::defineConfiguration();
+
+        $this->setOption('model_form_options', array('validation_groups' => array('your_group_here')));
+    }
+
+Note that, if you explicitly add a constraint to a field when configuring it in your module,
+you'll need to set the validation group on that too, even if you've overridden `defineConfiguration` as above.
+Here's an example:
+
+        $modelFields->add(array(
+            "new_password" => array(
+                "form_type" => "password",
+                "label" => "New password",
+                "form_options" => array(
+                    'constraints' => new Length(array(
+                        'min' => 8,
+                        'minMessage' => 'The new password must be at least {{ limit }} characters',
+                        'groups' => 'your_group_here',
+                    ))),
+                ),
+        ));
 
 ## Custom field actions
 
@@ -79,34 +108,6 @@ You can also pass in a PHP callable which returns a URL string.  If you're passi
 
 If you don't set the `redirection_url` option, the user will be redirected to the appropriate entity's list page.
 
-## Validation groups
-
-You can set a validation group for all form fields created by your module.  Override `defineConfiguration` like this:
-
-    protected function defineConfiguration()
-    {
-        parent::defineConfiguration();
-
-        $this->setOption('model_form_options', array('validation_groups' => array('your_group_here')));
-    }
-
-Note that, if you explicitly add a constraint to a field when configuring it in your module,
-you'll need to set the validation group on that too, even if you've overridden `defineConfiguration` as above.
-Here's an example:
-
-        $modelFields->add(array(
-            "new_password" => array(
-                "form_type" => "password",
-                "label" => "New password",
-                "form_options" => array(
-                    'constraints' => new Length(array(
-                        'min' => 8,
-                        'minMessage' => 'The new password must be at least {{ limit }} characters',
-                        'groups' => 'your_group_here',
-                    ))),
-                ),
-        ));
-
 ## Custom templates
 
 You can use a custom Twig file for any of your templates if necessary.
@@ -119,7 +120,7 @@ For lists, for example:
 
 (For the create form, retrieve the `new` action and for the edit form, retrieve the `edit` action.)
 
-## Passing additional parameters into templates
+### Passing additional parameters into templates
 
 You have three options:
 
