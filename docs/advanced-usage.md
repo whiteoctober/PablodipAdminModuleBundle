@@ -107,6 +107,18 @@ Here's an example:
                 ),
         ));
 
+## Custom templates
+
+You can use a custom Twig file for any of your templates if necessary.
+Simply retrieve the relevant action and set its `'template'` option:
+
+For lists, for example:
+
+    $listAction = $listAction = $this->getAction("list");
+    $listAction->setOption('template', 'YourBundle:Admin:list.html.twig');
+
+(For the create form, retrieve the `new` action and for the edit form, retrieve the `edit` action.)
+
 ## Passing additional parameters into templates
 
 You have three options:
