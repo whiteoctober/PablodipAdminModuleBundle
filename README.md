@@ -26,5 +26,5 @@ Documentation is in the `docs` folder:
 
 The Admin bundle builds on top of Molino and Pablo's generic ModuleBundle.  These are documented:
 
-* Molino docs: https://github.com/whiteoctober/molino
-* ModuleBundle docs: https://github.com/whiteoctober/PablodipModuleBundle
+* Molino docs: [https://github.com/whiteoctober/molino](https://github.com/whiteoctober/molino)
+* ModuleBundle docs: [https://github.com/whiteoctober/PablodipModuleBundle](https://github.com/whiteoctober/PablodipModuleBundle)
