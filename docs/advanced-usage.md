@@ -139,6 +139,31 @@ For lists, for example:
 
 (For the create form, retrieve the `new` action and for the edit form, retrieve the `edit` action.)
 
+### Templates for list items
+
+You can also change the template that is used to display items in your lists.
+There are some default template types in `Resources/views/fields`, or you can create your own.
+
+Consider the example where an entity has an associated "creator" (a user object) and you want the
+creator's e-mail address to be displayed in the list.
+
+You'd start by creating a basic template file; let's call it `creator.html.twig`:
+
+    {% if model.Creator is not null %}
+        {{ model.Creator.email }}
+    {% endif %}
+
+And then you can reference that template when setting up your model fields in your module:
+
+    $modelFields = $this->getOption("model_fields");
+    $modelFields->add([
+        'creator' => [
+            'label' => 'Creator',
+            'template' => 'YourProjAdminBundle::fields/creator.html.twig',
+        ],
+    ]);
+
+
 ### Passing additional parameters into templates
 
 You have three options:
