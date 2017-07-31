@@ -26,11 +26,17 @@ class BooleanFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('value', 'choice', array('choices' => array(
-            'yes_or_no' => 'Yes or No',
-            'yes'       => 'Yes',
-            'no'        => 'No',
-        )));
+        $formBuilder->add('value', 'choice', array(
+            'choices' => array(
+                'Yes or No' => 'yes_or_no',
+                'Yes' => 'yes',
+                'No' => 'no',
+            ),
+            'choices_as_values' => true,
+            'choice_value' => function ($choice) {
+                return $choice;
+            },
+        ));
     }
 
     /**

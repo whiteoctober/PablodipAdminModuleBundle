@@ -15,13 +15,19 @@ class IntegerFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('type', 'choice', array('choices' => array(
-            'equals'                => '=',
-            'greater_than'          => '>',
-            'greater_than_or_equal' => '>=',
-            'less_than'          => '<',
-            'less_than_or_equal' => '<=',
-        )));
+        $formBuilder->add('type', 'choice', array(
+            'choices' => array(
+                '=' => 'equals',
+                '>' => 'greater_than',
+                '>=' => 'greater_than_or_equal',
+                '<' => 'less_than',
+                '<=' => 'less_than_or_equal',
+            ),
+            'choices_as_values' => true,
+            'choice_value' => function ($choice) {
+                return $choice;
+            },
+        ));
         $formBuilder->add('value', 'integer', array('required' => false));
     }
 

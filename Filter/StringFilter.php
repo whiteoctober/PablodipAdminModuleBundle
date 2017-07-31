@@ -26,11 +26,17 @@ class StringFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('type', 'choice', array('choices' => array(
-            'contains'     => 'Contains',
-            'not_contains' => 'Not contains',
-            'exactly'      => 'Exactly',
-        )));
+        $formBuilder->add('type', 'choice', array(
+            'choices' => array(
+                'Contains' => 'contains',
+                'Not contains' => 'not_contains',
+                'Exactly' => 'exactly',
+            ),
+            'choices_as_values' => true,
+            'choice_value' => function ($choice) {
+                return $choice;
+            },
+        ));
         $formBuilder->add('value', 'text', array('required' => false));
     }
 
