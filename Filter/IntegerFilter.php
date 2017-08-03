@@ -26,9 +26,6 @@ class IntegerFilter extends BaseFilter
                 '<=' => 'less_than_or_equal',
             ),
             'choices_as_values' => true,
-            'choice_value' => function ($choice) {
-                return $choice;
-            },
         ));
         $formBuilder->add('value', IntegerType::class, array('required' => false));
     }

@@ -35,9 +35,6 @@ class StringFilter extends BaseFilter
                 'Exactly' => 'exactly',
             ),
             'choices_as_values' => true,
-            'choice_value' => function ($choice) {
-                return $choice;
-            },
         ));
         $formBuilder->add('value', TextType::class, array('required' => false));
     }

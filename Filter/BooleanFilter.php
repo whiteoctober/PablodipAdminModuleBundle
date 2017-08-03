@@ -34,9 +34,6 @@ class BooleanFilter extends BaseFilter
                 'No' => 'no',
             ),
             'choices_as_values' => true,
-            'choice_value' => function ($choice) {
-                return $choice;
-            },
         ));
     }
 
