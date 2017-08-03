@@ -78,7 +78,7 @@ abstract class AdminModule extends Module
      */
     protected function parseConfiguration()
     {
-        if ($this->getContainer()->isScopeActive('request')) {
+        if ($this->getContainer()->get('request_stack')->getCurrentRequest()) {
             $this->adminSession = new AdminSession(
                 $this->getContainer()->get('request'),
                 $this->getContainer()->get('session'),
