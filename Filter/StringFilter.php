@@ -11,6 +11,8 @@
 
 namespace Pablodip\AdminModuleBundle\Filter;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Molino\QueryInterface;
 
@@ -26,12 +28,15 @@ class StringFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('type', 'choice', array('choices' => array(
-            'contains'     => 'Contains',
-            'not_contains' => 'Not contains',
-            'exactly'      => 'Exactly',
-        )));
-        $formBuilder->add('value', 'text', array('required' => false));
+        $formBuilder->add('type', ChoiceType::class, array(
+            'choices' => array(
+                'Contains' => 'contains',
+                'Not contains' => 'not_contains',
+                'Exactly' => 'exactly',
+            ),
+            'choices_as_values' => true,
+        ));
+        $formBuilder->add('value', TextType::class, array('required' => false));
     }
 
     /**

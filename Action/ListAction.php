@@ -16,6 +16,7 @@ use Pablodip\ModuleBundle\OptionBag;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pablodip\AdminModuleBundle\Filter\FilterInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * ListAction.
@@ -158,12 +159,12 @@ class ListAction extends RouteAction
         $form = null;
         if ($enabled) {
             $formBuilder = $this->get('form.factory')
-                ->createNamedBuilder($this->getOption('advanced_search_parameter'), 'form', null, array('csrf_protection' => false))
+                ->createNamedBuilder($this->getOption('advanced_search_parameter'), FormType::class, null, array('csrf_protection' => false))
             ;
             $filters = $this->getAdvancedSearchFilters($fields);
             foreach ($filters as $fieldName => $filter) {
                 $fieldData = $fields->get($fieldName);
-                $filterFormBuilder = $this->get('form.factory')->createNamedBuilder($fieldName, 'form', null, array('label' => $fieldData->getLabel()));
+                $filterFormBuilder = $this->get('form.factory')->createNamedBuilder($fieldName, FormType::class, null, array('label' => $fieldData->getLabel()));
                 $filter->buildForm($filterFormBuilder);
                 $formBuilder->add($filterFormBuilder);
             }

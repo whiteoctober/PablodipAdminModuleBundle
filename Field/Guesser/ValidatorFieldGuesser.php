@@ -46,8 +46,8 @@ class ValidatorFieldGuesser implements FieldGuesserInterface
         $classMetadata = $this->metadataFactory->getMetadataFor($class);
         // normal and camelized for getters
         foreach (array($fieldName, Container::camelize($fieldName)) as $name) {
-            if ($classMetadata->hasMemberMetadatas($name)) {
-                foreach ($classMetadata->getMemberMetadatas($name) as $memberMetadata) {
+            if ($classMetadata->hasPropertyMetadata($name)) {
+                foreach ($classMetadata->getPropertyMetadata($name) as $memberMetadata) {
                     foreach ($memberMetadata->getConstraints() as $constraint) {
                         $options = array_merge($options, $this->guessOptionsForConstraint($constraint));
                     }

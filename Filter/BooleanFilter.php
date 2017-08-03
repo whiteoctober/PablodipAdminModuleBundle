@@ -11,6 +11,7 @@
 
 namespace Pablodip\AdminModuleBundle\Filter;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilder;
 use Molino\QueryInterface;
 
@@ -26,11 +27,14 @@ class BooleanFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('value', 'choice', array('choices' => array(
-            'yes_or_no' => 'Yes or No',
-            'yes'       => 'Yes',
-            'no'        => 'No',
-        )));
+        $formBuilder->add('value', ChoiceType::class, array(
+            'choices' => array(
+                'Yes or No' => 'yes_or_no',
+                'Yes' => 'yes',
+                'No' => 'no',
+            ),
+            'choices_as_values' => true,
+        ));
     }
 
     /**

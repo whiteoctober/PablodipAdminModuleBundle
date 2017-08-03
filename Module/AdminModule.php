@@ -20,6 +20,7 @@ use Pablodip\AdminModuleBundle\Field\Guesser\IdFieldGuesser;
 use Pablodip\AdminModuleBundle\Field\Guesser\ValidatorFieldGuesser;
 use Pablodip\AdminModuleBundle\AdminSession;
 use Pablodip\AdminModuleBundle\Action;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * AdminModule.
@@ -78,7 +79,7 @@ abstract class AdminModule extends Module
      */
     protected function parseConfiguration()
     {
-        if ($this->getContainer()->isScopeActive('request')) {
+        if ($this->getContainer()->get('request_stack')->getCurrentRequest()) {
             $this->adminSession = new AdminSession(
                 $this->getContainer()->get('request'),
                 $this->getContainer()->get('session'),
@@ -113,7 +114,7 @@ abstract class AdminModule extends Module
 
         $formBuilder = $this->getContainer()
             ->get('form.factory')
-            ->createBuilder('form', $model, $options)
+            ->createBuilder(FormType::class, $model, $options)
         ;
 
         foreach ($fields as $field) {
