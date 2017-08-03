@@ -2,6 +2,8 @@
 
 namespace Pablodip\AdminModuleBundle\Filter;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilder;
 use Molino\QueryInterface;
 
@@ -15,7 +17,7 @@ class IntegerFilter extends BaseFilter
      */
     public function buildForm(FormBuilder $formBuilder)
     {
-        $formBuilder->add('type', 'choice', array(
+        $formBuilder->add('type', ChoiceType::class, array(
             'choices' => array(
                 '=' => 'equals',
                 '>' => 'greater_than',
@@ -28,7 +30,7 @@ class IntegerFilter extends BaseFilter
                 return $choice;
             },
         ));
-        $formBuilder->add('value', 'integer', array('required' => false));
+        $formBuilder->add('value', IntegerType::class, array('required' => false));
     }
 
     /**

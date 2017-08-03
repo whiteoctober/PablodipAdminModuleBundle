@@ -27,9 +27,9 @@ You can also pass through settings for these types.  Here's an example:
     $modelFields->add(array(
         'votesPercent' => array(
             'label' => 'votes_percent',
-            'form_type' => 'percent',
+            'form_type' => PercentType::class,
             'template' => 'PablodipAdminModuleBundle::fields/text.html.twig',
-            'form_options' => array('required' => false, 'type' => 'integer')
+            'form_options' => array('required' => false, 'type' => IntegerType::class)
         ),
     ));
     
@@ -50,7 +50,7 @@ Here's an example:
 
         $modelFields->add(array(
             "new_password" => array(
-                "form_type" => "password",
+                "form_type" => PasswordType::class,
                 "label" => "New password",
                 "form_options" => array(
                     'constraints' => new Length(array(

@@ -4,6 +4,7 @@ namespace Pablodip\AdminModuleTestBundle\Module;
 
 use Pablodip\AdminModuleBundle\Module\AdminModule;
 use Pablodip\ModuleBundle\Extension\Molino\MandangoMolinoExtension;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MandangoArticleAdminModule extends AdminModule
 {
@@ -24,7 +25,7 @@ class MandangoArticleAdminModule extends AdminModule
         $modelFields = $this->getOption('model_fields');
         $modelFields->add(array(
             'title',
-            'content' => array('form_type' => 'textarea'),
+            'content' => array('form_type' => TextareaType::class),
             'isActive' => array('label' => 'Is Active?'),
         ));
         $this->getAction('list')->getOption('list_fields')->add(array(
